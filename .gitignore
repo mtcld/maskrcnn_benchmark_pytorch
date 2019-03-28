@@ -1,1 +1,5 @@
-build/
+build/*
+maskrcnn_benchmark/*
+.idea/
+maskrcnn_benchmark.egg-info/SOURCES.txt
+maskrcnn_benchmark/
