@@ -22,7 +22,7 @@ MODEL:
     POOLER_SAMPLING_RATIO: 2
     FEATURE_EXTRACTOR: "FPN2MLPFeatureExtractor"
     PREDICTOR: "FPNPredictor"
-    NUM_CLASSES: 2
+    NUM_CLASSES: 11
   ROI_MASK_HEAD:
     POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
     FEATURE_EXTRACTOR: "MaskRCNNFPNFeatureExtractor"
@@ -32,7 +32,7 @@ MODEL:
     RESOLUTION: 28
     SHARE_BOX_FEATURE_EXTRACTOR: False
   MASK_ON: True
-OUTPUT_DIR: "/home/ubuntu/models/pytorch_models/scratch28march/"
+OUTPUT_DIR: "/home/ubuntu/models/pytorch_models/justchecking/"
 DATASETS:
   TRAIN: ("coco_2017_train", "coco_2017_val")
   TEST: ("coco_2017_val",)
