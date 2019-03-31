@@ -10,7 +10,7 @@ from maskrcnn_benchmark.utils.comm import get_world_size
 from maskrcnn_benchmark.utils.metric_logger import MetricLogger
 
 import visdom
-vis = visdom.Visdom()
+vis = visdom.Visdom(port=6006)
 
 def reduce_loss_dict(loss_dict):
     """
@@ -55,6 +55,15 @@ def do_train(
     model.train()
     start_training_time = time.time()
     end = time.time()
+    temp_dict = {
+        'loss': [],
+        'loss_box_reg': [],
+        'loss_classifier': [],
+        'loss_mask': [],
+        'loss_objectness': [],
+        'loss_rpn_box_reg': [],
+        'time': []
+    }
     for iteration, (images, targets, _) in enumerate(data_loader, start_iter):
         data_time = time.time() - end
         iteration = iteration + 1
@@ -90,15 +99,6 @@ def do_train(
         if iteration % 20 == 0 or iteration == max_iter:
 
             print('Metrics Dictionary =======')
-            temp_dict = {
-                'loss': [],
-                'loss_box_reg': [],
-                'loss_classifier': [],
-                'loss_mask': [],
-                'loss_objectness': [],
-                'loss_rpn_box_reg': [],
-                'time': []
-            }
 
             temp_dict['loss'].append(str(meters).split('  ')[0].split(':')[1].split(' ')[0])
             temp_dict['loss_box_reg'].append(str(meters).split('  ')[1].split(':')[1].split(' ')[0])
