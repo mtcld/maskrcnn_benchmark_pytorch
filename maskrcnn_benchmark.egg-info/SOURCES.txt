@@ -1,8 +1,12 @@
 README.md
 setup.py
-/home/sulabh/Documents/work/dmgdetection/pytorch/maskrcnn-benchmark/maskrcnn_benchmark/csrc/vision.cpp
-/home/sulabh/Documents/work/dmgdetection/pytorch/maskrcnn-benchmark/maskrcnn_benchmark/csrc/cpu/ROIAlign_cpu.cpp
-/home/sulabh/Documents/work/dmgdetection/pytorch/maskrcnn-benchmark/maskrcnn_benchmark/csrc/cpu/nms_cpu.cpp
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/vision.cpp
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cpu/ROIAlign_cpu.cpp
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cpu/nms_cpu.cpp
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cuda/ROIAlign_cuda.cu
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cuda/ROIPool_cuda.cu
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cuda/SigmoidFocalLoss_cuda.cu
+/home/ubuntu/projects/pytorch/maskrcnn_benchmark_pytorch/maskrcnn_benchmark/csrc/cuda/nms.cu
 maskrcnn_benchmark/__init__.py
 maskrcnn_benchmark.egg-info/PKG-INFO
 maskrcnn_benchmark.egg-info/SOURCES.txt
@@ -18,6 +22,7 @@ maskrcnn_benchmark/data/datasets/__init__.py
 maskrcnn_benchmark/data/datasets/coco.py
 maskrcnn_benchmark/data/datasets/concat_dataset.py
 maskrcnn_benchmark/data/datasets/list_dataset.py
+maskrcnn_benchmark/data/datasets/part.py
 maskrcnn_benchmark/data/datasets/voc.py
 maskrcnn_benchmark/data/datasets/evaluation/__init__.py
 maskrcnn_benchmark/data/datasets/evaluation/coco/__init__.py

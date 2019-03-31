@@ -1,6 +1,6 @@
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  WEIGHT: "/home/sulabh/Documents/work/dmgdetection/pytorch/model/27MarchTraining0.75/model_final.pth"
+  WEIGHT: "/home/ubuntu/models/pytorch_models/scratch28march/model_final.pth"
   # # ROI_BOX_HEAD.NUM_CLASSES: 10 + 1
   # #  MODEL.ROI_BOX_HEAD.NUM_CLASSES = your_classes + background
   BACKBONE:
@@ -32,7 +32,7 @@ MODEL:
     RESOLUTION: 28
     SHARE_BOX_FEATURE_EXTRACTOR: False
   MASK_ON: True
-OUTPUT_DIR: "/home/ubuntu/pytorch_models"
+OUTPUT_DIR: "/home/ubuntu/models"
 DATASETS:
   TRAIN: ("coco_2017_train", "coco_2017_val")
   TEST: ("coco_2017_val",)
