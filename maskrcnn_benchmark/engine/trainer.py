@@ -100,13 +100,13 @@ def do_train(
                 'time': []
             }
 
-            temp_dict['loss'].append(str(meters).split(':')[1].split('(')[0])
-            temp_dict['loss_box_reg'].append(str(meters).split(':')[3].split('(')[0])
-            temp_dict['loss_classifier'].append(str(meters).split(':')[5].split('(')[0])
-            temp_dict['loss_mask'].append(str(meters).split(':')[7].split('(')[0])
-            temp_dict['loss_objectness'].append(str(meters).split(':')[9].split('(')[0])
-            temp_dict['loss_rpn_box_reg'].append(str(meters).split(':')[11].split('(')[0])
-            temp_dict['time'].append(str(meters).split(':')[13].split('(')[0])
+            temp_dict['loss'].append(str(meters).split('  ')[0].split(':')[1].split(' ')[0])
+            temp_dict['loss_box_reg'].append(str(meters).split('  ')[1].split(':')[1].split(' ')[0])
+            temp_dict['loss_classifier'].append(str(meters).split('  ')[2].split(':')[1].split(' ')[0])
+            temp_dict['loss_mask'].append(str(meters).split('  ')[3].split(':')[1].split(' ')[0])
+            temp_dict['loss_objectness'].append(str(meters).split('  ')[4].split(':')[1].split(' ')[0])
+            temp_dict['loss_rpn_box_reg'].append(str(meters).split('  ')[5].split(':')[1].split(' ')[0])
+            temp_dict['time'].append(str(meters).split('  ')[6].split(':')[1].split(' ')[0])
 
             print(temp_dict)
             # # loss
