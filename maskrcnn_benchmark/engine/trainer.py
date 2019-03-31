@@ -94,6 +94,12 @@ def do_train(
         end = time.time()
         meters.update(time=batch_time, data=data_time)
 
+        print('meters =================================')
+        print(meters)
+
+        print('str(meters) =================================')
+        print(str(meters))
+
         eta_seconds = meters.time.global_avg * (max_iter - iteration)
         eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
 
