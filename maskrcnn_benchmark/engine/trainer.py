@@ -9,6 +9,8 @@ import torch.distributed as dist
 from maskrcnn_benchmark.utils.comm import get_world_size
 from maskrcnn_benchmark.utils.metric_logger import MetricLogger
 
+import visdom
+vis = visdom.Visdom()
 
 def reduce_loss_dict(loss_dict):
     """
@@ -69,7 +71,9 @@ def do_train(
 
         # reduce losses over all GPUs for logging purposes
         loss_dict_reduced = reduce_loss_dict(loss_dict)
+
         losses_reduced = sum(loss for loss in loss_dict_reduced.values())
+
         meters.update(loss=losses_reduced, **loss_dict_reduced)
 
         optimizer.zero_grad()
@@ -84,6 +88,75 @@ def do_train(
         eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
 
         if iteration % 20 == 0 or iteration == max_iter:
+
+            print('Metrics Dictionary =======')
+            temp_dict = {
+                'loss': [],
+                'loss_box_reg': [],
+                'loss_classifier': [],
+                'loss_mask': [],
+                'loss_objectness': [],
+                'loss_rpn_box_reg': [],
+                'time': []
+            }
+
+            temp_dict['loss'].append(str(meters).split(':')[1].split('(')[0])
+            temp_dict['loss_box_reg'].append(str(meters).split(':')[3].split('(')[0])
+            temp_dict['loss_classifier'].append(str(meters).split(':')[5].split('(')[0])
+            temp_dict['loss_mask'].append(str(meters).split(':')[7].split('(')[0])
+            temp_dict['loss_objectness'].append(str(meters).split(':')[9].split('(')[0])
+            temp_dict['loss_rpn_box_reg'].append(str(meters).split(':')[11].split('(')[0])
+            temp_dict['time'].append(str(meters).split(':')[13].split('(')[0])
+
+            print(temp_dict)
+            # # loss
+            losstrace = dict(x=temp_dict['time'], y=temp_dict['loss'], mode="markers+lines", type='custom',
+                         marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                        name='1st Trace')
+            losslayout = dict(title="loss", xaxis={'title': 'time'}, yaxis={'title': 'loss'})
+            vis._send({'data': [losstrace], 'layout': losslayout, 'win': 'mywinloss'})
+
+            # # loss_box_reg
+            loss_box_regtrace = dict(x=temp_dict['time'], y=temp_dict['loss_box_reg'], mode="markers+lines", type='custom',
+                             marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                             name='2nd Trace')
+            loss_box_reglayout = dict(title="loss_box_reg", xaxis={'title': 'time'}, yaxis={'title': 'loss_box_reg'})
+            vis._send({'data': [loss_box_regtrace], 'layout': loss_box_reglayout, 'win': 'mywinloss_box_reg'})
+
+            # # loss_classifier
+            loss_classifiertrace = dict(x=temp_dict['time'], y=temp_dict['loss_classifier'], mode="markers+lines",
+                                     type='custom',
+                                     marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                                     name='3rd Trace')
+            loss_classifierlayout = dict(title="loss_classifier", xaxis={'title': 'time'}, yaxis={'title': 'loss_classifier'})
+            vis._send({'data': [loss_classifiertrace], 'layout': loss_classifierlayout, 'win': 'mywinloss_classifier'})
+
+            # # loss_mask
+            loss_masktrace = dict(x=temp_dict['time'], y=temp_dict['loss_mask'], mode="markers+lines",
+                                        type='custom',
+                                        marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                                        name='4th Trace')
+            loss_masklayout = dict(title="loss_mask", xaxis={'title': 'time'}, yaxis={'title': 'loss_mask'})
+            vis._send({'data': [loss_masktrace], 'layout': loss_masklayout, 'win': 'mywinloss_mask'})
+
+            # # loss_objectness
+            loss_objectnesstrace = dict(x=temp_dict['time'], y=temp_dict['loss_objectness'], mode="markers+lines",
+                                        type='custom',
+                                        marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                                        name='5th Trace')
+            loss_objectnesslayout = dict(title="loss_objectness", xaxis={'title': 'time'}, yaxis={'title': 'loss_objectness'})
+            vis._send({'data': [loss_objectnesstrace], 'layout': loss_objectnesslayout, 'win': 'mywinloss_objectness'})
+
+            # # loss_rpn_box_reg
+            loss_rpn_box_regtrace = dict(x=temp_dict['time'], y=temp_dict['loss_rpn_box_reg'], mode="markers+lines",
+                                        type='custom',
+                                        marker={'color': 'red', 'symbol': 104, 'size': "10"},
+                                        name='6th Trace')
+            loss_rpn_box_reglayout = dict(title="loss_rpn_box_reg", xaxis={'title': 'time'},
+                                         yaxis={'title': 'loss_rpn_box_reg'})
+            vis._send({'data': [loss_rpn_box_regtrace], 'layout': loss_rpn_box_reglayout, 'win': 'mywinloss_rpn_box_reg'})
+
+            # #
             logger.info(
                 meters.delimiter.join(
                     [
