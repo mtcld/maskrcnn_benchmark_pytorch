@@ -104,15 +104,14 @@ def do_train(
             print(str(meters).split('  ')[0].split(':')[1])
             print('position 0')
             print(str(meters).split('  ')[0].split(':')[1].split('(')[0])
-            print(int(str(meters).split('  ')[0].split(':')[1].split('(')[0]))
 
-            temp_dict['loss'].append(int(str(meters).split('  ')[0].split(':')[1].split('(')[0]))
-            temp_dict['loss_box_reg'].append(int(str(meters).split('  ')[1].split(':')[1].split('(')[0]))
-            temp_dict['loss_classifier'].append(int(str(meters).split('  ')[2].split(':')[1].split('(')[0]))
-            temp_dict['loss_mask'].append(int(str(meters).split('  ')[3].split(':')[1].split('(')[0]))
-            temp_dict['loss_objectness'].append(int(str(meters).split('  ')[4].split(':')[1].split('(')[0]))
-            temp_dict['loss_rpn_box_reg'].append(int(str(meters).split('  ')[5].split(':')[1].split('(')[0]))
-            temp_dict['time'].append(int(str(meters).split('  ')[6].split(':')[1].split('(')[0]))
+            temp_dict['loss'].append(float(str(meters).split('  ')[0].split(':')[1].split('(')[0]))
+            temp_dict['loss_box_reg'].append(float(str(meters).split('  ')[1].split(':')[1].split('(')[0]))
+            temp_dict['loss_classifier'].append(float(str(meters).split('  ')[2].split(':')[1].split('(')[0]))
+            temp_dict['loss_mask'].append(float(str(meters).split('  ')[3].split(':')[1].split('(')[0]))
+            temp_dict['loss_objectness'].append(float(str(meters).split('  ')[4].split(':')[1].split('(')[0]))
+            temp_dict['loss_rpn_box_reg'].append(float(str(meters).split('  ')[5].split(':')[1].split('(')[0]))
+            temp_dict['time'].append(float(str(meters).split('  ')[6].split(':')[1].split('(')[0]))
 
             print(temp_dict)
             # # loss
